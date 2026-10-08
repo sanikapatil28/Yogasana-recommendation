@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Admin - YogaSutra AI{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         ADMIN NAVBAR
+    =========================================== -->
+
+    <nav class="admin-navbar">
+
+        <div class="admin-nav-container">
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="admin-logo">
+
+                🧘
+                <span>YogaSutra AI</span>
+
+            </a>
+
+            <div class="admin-nav-title">
+                ADMIN PANEL
+            </div>
+
+            <div class="admin-nav-links">
+
+                <a href="{{ url_for('admin_dashboard') }}">
+                    🏠 Dashboard
+                </a>
+
+                <a href="{{ url_for('admin_users') }}">
+                    👥 Users
+                </a>
+
+                <a href="{{ url_for('admin_plans') }}">
+                    📋 Plans
+                </a>
+
+                <a href="{{ url_for('admin_yoga') }}">
+                    🧘 Yoga Knowledge
+                </a>
+
+                <a href="{{ url_for('admin_logout') }}"
+                   class="admin-logout">
+                    🚪 Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==========================================
+         ADMIN CONTENT
+    =========================================== -->
+
+    <main>
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                <div class="admin-flash-container">
+
+                    {% for message in messages %}
+
+                        <div class="admin-flash">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- ==========================================
+         ADMIN FOOTER
+    =========================================== -->
+
+    <footer class="admin-footer">
+
+        <p>
+            © 2026 YogaSutra AI —
+            Admin Panel
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

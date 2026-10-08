@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Profile - YogaSutra AI
+{% endblock %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <div class="profile-card">
+
+        <!-- Profile Header -->
+
+        <div class="profile-avatar">
+            👤
+        </div>
+
+        <h1>
+            {{ user.get("name", "User") }}
+        </h1>
+
+        <p class="profile-email">
+            {{ user.get("email", "") }}
+        </p>
+
+
+        <!-- Account Information -->
+
+        <div class="profile-info">
+
+            <div class="profile-info-row">
+                <span>👤 Name</span>
+                <strong>
+                    {{ user.get("name", "User") }}
+                </strong>
+            </div>
+
+
+            <div class="profile-info-row">
+                <span>📧 Email</span>
+                <strong>
+                    {{ user.get("email", "") }}
+                </strong>
+            </div>
+
+
+            {% if user.get("age") %}
+
+            <div class="profile-info-row">
+                <span>🎂 Age</span>
+                <strong>
+                    {{ user.get("age") }}
+                </strong>
+            </div>
+
+            {% endif %}
+
+
+            {% if user.get("experience") %}
+
+            <div class="profile-info-row">
+                <span>🧘 Yoga Experience</span>
+                <strong>
+                    {{ user.get("experience") }}
+                </strong>
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Profile Actions -->
+
+        <div class="profile-buttons">
+
+            <a href="{{ url_for('dashboard') }}">
+                📊 Dashboard
+            </a>
+
+
+            <a href="{{ url_for('recommendation') }}">
+                🤖 Generate Yoga Plan
+            </a>
+
+
+            <a href="{{ url_for('home') }}">
+                🏠 Home
+            </a>
+
+
+            <a href="{{ url_for('logout') }}"
+               class="logout-button">
+                🚪 Logout
+            </a>
+
+        </div>
+
+
+        <!-- Profile Note -->
+
+        <div class="profile-note">
+
+            <p>
+                🧘 Keep practicing consistently and continue
+                your personalized yoga journey with YogaSutra AI.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

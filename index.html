@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% block title %}
+YogaSutra AI - Intelligent Yogasana Recommendation System
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+    <p class="small-title">
+        ✨ Patanjali's Yoga Sutra as 
+            AI-based Yogasana Recommendation System
+    </p>
+
+    <h1>
+        Find the Perfect
+        <span>Yoga Routine</span>
+        for You
+    </h1>
+
+    <p class="hero-description">
+        Get personalized yogasana, pranayama and meditation
+        recommendations based on your fitness level, goals,
+        experience and available time.
+    </p>
+
+    <div class="hero-buttons">
+
+        <!-- Dynamic Main Button -->
+
+        {% if session.get("user_id") %}
+
+        <a href="{{ url_for('recommendation') }}"
+           class="primary-btn">
+            🤖 Generate My Yoga Plan →
+        </a>
+
+        {% else %}
+
+        <a href="{{ url_for('register') }}"
+           class="primary-btn">
+            Get Started →
+        </a>
+
+        {% endif %}
+
+
+        <a href="#how-it-works"
+           class="secondary-btn">
+            How It Works
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="hero-image">
+
+    <div class="yoga-circle">
+        🧘
+    </div>
+
+    <div class="floating-card card-one">
+        💪 Strength
+    </div>
+
+    <div class="floating-card card-two">
+        🧘 Flexibility
+    </div>
+
+    <div class="floating-card card-three">
+        😌 Stress Relief
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- How It Works -->
+
+<section class="how-it-works" id="how-it-works">
+
+<div class="section-heading">
+
+    <p>HOW IT WORKS</p>
+
+    <h2>
+        Your Personalized Yoga Journey
+    </h2>
+
+    <span>
+        Get your AI-powered yoga plan in three simple steps.
+    </span>
+
+</div>
+
+
+<div class="steps-container">
+
+
+    <div class="step-card">
+
+        <div class="step-number">
+            1
+        </div>
+
+        <div class="step-icon">
+            👤
+        </div>
+
+        <h3>Tell Us About Yourself</h3>
+
+        <p>
+            Enter your age, fitness level, yoga experience,
+            goals and available practice time.
+        </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+        <div class="step-number">
+            2
+        </div>
+
+        <div class="step-icon">
+            🤖
+        </div>
+
+        <h3>AI Analyzes Your Needs</h3>
+
+        <p>
+            Our recommendation system analyzes your inputs
+            and finds the most suitable yoga practices.
+        </p>
+
+    </div>
+
+
+    <div class="step-card">
+
+        <div class="step-number">
+            3
+        </div>
+
+        <div class="step-icon">
+            🧘
+        </div>
+
+        <h3>Get Your Yoga Plan</h3>
+
+        <p>
+            Receive a personalized routine containing yogasanas,
+            pranayama and meditation.
+        </p>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+<!-- Benefits -->
+
+<section class="benefits" id="benefits">
+
+<div class="section-heading">
+
+    <p>WHY YOGA?</p>
+
+    <h2>
+        Transform Your Mind and Body
+    </h2>
+
+</div>
+
+
+<div class="benefits-container">
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            ❤️
+        </div>
+
+        <h3>Better Health</h3>
+
+        <p>
+            Improve flexibility, strength, posture and overall wellness.
+        </p>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            🧠
+        </div>
+
+        <h3>Reduce Stress</h3>
+
+        <p>
+            Relax your mind through yoga, pranayama and meditation.
+        </p>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            ⚡
+        </div>
+
+        <h3>More Energy</h3>
+
+        <p>
+            Build a healthy daily routine and feel more energetic.
+        </p>
+
+    </div>
+
+
+    <div class="benefit-card">
+
+        <div class="benefit-icon">
+            🎯
+        </div>
+
+        <h3>Personalized Goals</h3>
+
+        <p>
+            Get recommendations designed according to your personal goals.
+        </p>
+
+    </div>
+
+
+</div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta-section">
+
+<div class="cta-content">
+
+    <h2>
+        Start Your Personalized Yoga Journey Today
+    </h2>
+
+    <p>
+        Let YogaSutra AI create a yoga routine designed specifically for you.
+    </p>
+
+
+    <!-- Dynamic CTA -->
+
+    {% if session.get("user_id") %}
+
+    <a href="{{ url_for('recommendation') }}"
+       class="primary-btn">
+        🤖 Generate My Yoga Plan →
+    </a>
+
+    {% else %}
+
+    <a href="{{ url_for('register') }}"
+       class="primary-btn">
+        Create Your Free Account →
+    </a>
+
+    {% endif %}
+
+</div>
+
+</section>
+
+
+{% endblock %}

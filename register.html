@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register - YogaSutra AI
+{% endblock %}
+
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <div class="auth-header">
+
+            <div class="auth-icon">
+                🧘
+            </div>
+
+            <h1>Create Your Account</h1>
+
+            <p>
+                Start your personalized yoga journey today.
+            </p>
+
+        </div>
+
+
+        <form method="POST" class="auth-form">
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Email Address</label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>Age</label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        placeholder="Your age"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Experience Level</label>
+
+                    <select name="experience" required>
+
+                        <option value="">
+                            Select Level
+                        </option>
+
+                        <option value="Beginner">
+                            Beginner
+                        </option>
+
+                        <option value="Intermediate">
+                            Intermediate
+                        </option>
+
+                        <option value="Advanced">
+                            Advanced
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-button"
+            >
+                Create Account →
+            </button>
+
+
+            <p class="auth-switch">
+
+                Already have an account?
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+            </p>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

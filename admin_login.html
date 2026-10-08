@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - YogaSutra AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<section class="auth-section">
+
+    <div class="auth-container">
+
+        <!-- Header -->
+        <div class="auth-header">
+
+            <div class="auth-icon">
+                🛡️
+            </div>
+
+            <p class="small-title">
+                YOGASUTRA AI
+            </p>
+
+            <h1>
+                Admin <span>Login</span>
+            </h1>
+
+            <p>
+                Sign in to access the YogaSutra AI administration panel.
+            </p>
+
+        </div>
+
+
+        <!-- Login Form -->
+        <form method="POST"
+              action="{{ url_for('admin_login') }}"
+              class="auth-form">
+
+            <div class="form-group">
+
+                <label for="email">
+                    Admin Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter admin email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    required
+                >
+
+            </div>
+
+
+            <button type="submit" class="admin-login-btn">
+                🔐 Login to Admin Panel
+            </button>
+
+        </form>
+
+
+        <!-- Back Button -->
+        <a href="{{ url_for('home') }}"
+           class="admin-back-yoga-btn">
+            ← Back to YogaSutra AI
+        </a>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}YogaSutra AI{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+    <!-- Logo -->
+    <div class="logo">
+        🧘 YogaSutra <span>AI</span>
+    </div>
+
+
+    <!-- Navigation -->
+    <ul class="nav-links">
+
+        <li>
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('home') }}#how-it-works">
+                How It Works
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ url_for('home') }}#benefits">
+                Benefits
+            </a>
+        </li>
+
+
+        <!-- =================================================
+             USER NOT LOGGED IN
+        ================================================== -->
+
+        {% if not session.get("user_id") %}
+
+            <li>
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('register') }}"
+                   class="nav-button">
+                    Get Started
+                </a>
+            </li>
+
+
+        <!-- =================================================
+             USER LOGGED IN
+        ================================================== -->
+
+        {% else %}
+
+            <li>
+                <a href="{{ url_for('dashboard') }}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('recommendation') }}">
+                    Generate Plan
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('profile') }}"
+                   class="nav-button">
+                    👤 Profile
+                </a>
+            </li>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             ADMIN LOGIN
+             Always visible
+        ================================================== -->
+
+        <li>
+            <a href="{{ url_for('admin_login') }}">
+                🛡️ Admin
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- =====================================================
+     FLASH MESSAGES
+===================================================== -->
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <!-- Brand -->
+
+        <div>
+
+            <h2>
+                🧘 YogaSutra AI
+            </h2>
+
+            <p>
+                Your intelligent companion for personalized
+                yoga, pranayama and meditation recommendations.
+            </p>
+
+        </div>
+
+
+        <!-- Quick Links -->
+
+        <div>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
+
+            <a href="{{ url_for('home') }}#how-it-works">
+                How It Works
+            </a>
+
+            <a href="{{ url_for('home') }}#benefits">
+                Benefits
+            </a>
+
+        </div>
+
+
+        <!-- Account -->
+
+        <div>
+
+            <h3>
+                Account
+            </h3>
+
+
+            {% if session.get("user_id") %}
+
+                <a href="{{ url_for('dashboard') }}">
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('recommendation') }}">
+                    Generate Plan
+                </a>
+
+                <a href="{{ url_for('profile') }}">
+                    Profile
+                </a>
+
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}">
+                    Create Account
+                </a>
+
+            {% endif %}
+
+
+            <!-- Admin -->
+
+            <a href="{{ url_for('admin_login') }}">
+                🛡️ Admin Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 YogaSutra AI |
+            Intelligent Yogasana Recommendation System
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

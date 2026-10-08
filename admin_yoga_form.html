@@ -1,0 +1,323 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+{% if yoga %}Edit Yogasana{% else %}Add Yogasana{% endif %} - YogaSutra AI
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+
+    <div class="admin-container">
+
+        <div class="admin-page-header">
+            <p class="small-title">🧘 YOGA KNOWLEDGE</p>
+
+            <h1>
+                {% if yoga %}
+                    Edit <span>Yogasana</span>
+                {% else %}
+                    Add New <span>Yogasana</span>
+                {% endif %}
+            </h1>
+
+            <p>
+                {% if yoga %}
+                    Update the details of this yogasana.
+                {% else %}
+                    Add a new yogasana to the YogaSutra AI knowledge base.
+                {% endif %}
+            </p>
+        </div>
+
+
+        <form class="admin-yoga-form" method="POST">
+
+            <!-- Name -->
+            <div class="admin-form-group">
+                <label>Yogasana Name</label>
+
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Example: Balasana"
+                    value="{{ yoga.name if yoga else '' }}"
+                    required
+                >
+            </div>
+
+
+            <!-- Goal -->
+            <div class="admin-form-group">
+
+                <label>Goal</label>
+
+                <select name="goal" required>
+
+                    <option value="">Select Goal</option>
+
+                    <option value="Weight Gain"
+                        {% if yoga and "Weight Gain" in yoga.goals %}
+                            selected
+                        {% endif %}>
+                        Weight Gain
+                    </option>
+
+                    <option value="Weight Loss"
+                        {% if yoga and "Weight Loss" in yoga.goals %}
+                            selected
+                        {% endif %}>
+                        Weight Loss
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Fitness Level -->
+            <div class="admin-form-group">
+
+                <label>Fitness Levels</label>
+
+                <div class="admin-checkbox-group">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="levels"
+                            value="Beginner"
+                            {% if yoga and "Beginner" in yoga.levels %}
+                                checked
+                            {% endif %}
+                        >
+                        Beginner
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="levels"
+                            value="Intermediate"
+                            {% if yoga and "Intermediate" in yoga.levels %}
+                                checked
+                            {% endif %}
+                        >
+                        Intermediate
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="levels"
+                            value="Advanced"
+                            {% if yoga and "Advanced" in yoga.levels %}
+                                checked
+                            {% endif %}
+                        >
+                        Advanced
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Age Limit -->
+            <div class="admin-form-row">
+
+                <div class="admin-form-group">
+
+                    <label>Maximum Age</label>
+
+                    <input
+                        type="number"
+                        name="age_limit"
+                        min="5"
+                        max="120"
+                        value="{{ yoga.age_limit if yoga else 100 }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Duration -->
+                <div class="admin-form-group">
+
+                    <label>Duration (Minutes)</label>
+
+                    <input
+                        type="number"
+                        name="duration"
+                        min="1"
+                        max="30"
+                        value="{{ yoga.duration if yoga else 3 }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Category -->
+            <div class="admin-form-group">
+
+                <label>Category</label>
+
+                <select name="category" required>
+
+                    <option value="">Select Category</option>
+
+                    {% set categories = [
+                        "Standing",
+                        "Strength",
+                        "Core",
+                        "Backbend",
+                        "Balance",
+                        "Forward Bend",
+                        "Twist",
+                        "Relaxation"
+                    ] %}
+
+                    {% for category in categories %}
+
+                        <option
+                            value="{{ category }}"
+                            {% if yoga and yoga.category == category %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Contraindications -->
+            <div class="admin-form-group">
+
+                <label>Contraindications</label>
+
+                <p class="admin-form-help">
+                    Select conditions where this yogasana should be avoided.
+                </p>
+
+                <div class="admin-checkbox-group">
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="back_pain"
+                            {% if yoga and "back_pain" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        Back Pain
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="neck_pain"
+                            {% if yoga and "neck_pain" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        Neck Pain
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="knee_pain"
+                            {% if yoga and "knee_pain" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        Knee Pain
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="high_blood_pressure"
+                            {% if yoga and "high_blood_pressure" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        High Blood Pressure
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="pregnancy"
+                            {% if yoga and "pregnancy" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        Pregnancy
+                    </label>
+
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            name="contraindications"
+                            value="wrist_pain"
+                            {% if yoga and "wrist_pain" in yoga.contraindications %}
+                                checked
+                            {% endif %}
+                        >
+                        Wrist Pain
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Buttons -->
+            <div class="admin-form-actions">
+
+                <button type="submit" class="admin-save-btn">
+                    {% if yoga %}
+                        💾 Update Yogasana
+                    {% else %}
+                        ➕ Add Yogasana
+                    {% endif %}
+                </button>
+
+                <a
+                    href="{{ url_for('admin_yoga') }}"
+                    class="admin-cancel-btn"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

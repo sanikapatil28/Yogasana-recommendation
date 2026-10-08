@@ -1,0 +1,188 @@
+{% extends "admin_base.html" %}
+
+{% block title %}
+Yoga Knowledge - Admin
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+
+    <div class="admin-container">
+
+        <!-- HEADER -->
+        <div class="admin-page-header">
+
+            <div>
+                <p class="small-title">🛡️ ADMIN PANEL</p>
+
+                <h1>
+                    Yoga <span>Knowledge</span>
+                </h1>
+
+                <p>
+                    Manage the yogasanas used by YogaSutra AI.
+                </p>
+            </div>
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="admin-back-btn">
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- ADD YOGA BUTTON -->
+
+        <div class="admin-action-bar">
+
+            <h2>🧘 Yogasanas</h2>
+
+            <a href="{{ url_for('admin_add_yoga') }}"
+               class="admin-add-btn">
+                + Add Yogasana
+            </a>
+
+        </div>
+
+
+        <!-- YOGA CARDS -->
+
+        <div class="admin-yoga-grid">
+
+    {% for yoga in yogasanas %}
+
+    <div class="admin-yoga-card">
+
+        <div class="admin-yoga-card-header">
+            <h3>🧘 {{ yoga.name }}</h3>
+            <span class="yoga-category">
+                {{ yoga.category }}
+            </span>
+        </div>
+
+        <div class="admin-yoga-details">
+
+            <p>
+                <strong>🎯 Goal:</strong>
+                {{ yoga.goals | join(", ") }}
+            </p>
+
+            <p>
+                <strong>📊 Level:</strong>
+                {{ yoga.levels | join(", ") }}
+            </p>
+
+            <p>
+                <strong>⏱️ Duration:</strong>
+                {{ yoga.duration }} minutes
+            </p>
+
+            <p>
+                <strong>🎂 Age Limit:</strong>
+                {{ yoga.age_limit }} years
+            </p>
+
+            <p>
+                <strong>⚠️ Contraindications:</strong>
+                {% if yoga.contraindications %}
+                    {{ yoga.contraindications | join(", ") }}
+                {% else %}
+                    None
+                {% endif %}
+            </p>
+
+        </div>
+
+        <div class="admin-yoga-actions">
+
+            <a
+                href="{{ url_for('admin_edit_yoga', yoga_name=yoga.name) }}"
+                class="admin-edit-btn"
+            >
+                ✏️ Edit
+            </a>
+
+            <form
+                action="{{ url_for('admin_delete_yoga', yoga_name=yoga.name) }}"
+                method="POST"
+                onsubmit="return confirm('Are you sure you want to delete this yogasana?');"
+            >
+                <button type="submit" class="admin-delete-btn">
+                    🗑️ Delete
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+        <!-- ==========================================
+     PRANAYAMA
+========================================== -->
+
+<div class="admin-knowledge-section">
+
+    <div class="admin-section-heading">
+        <h2>🌬️ Pranayama</h2>
+    </div>
+
+    <div class="admin-knowledge-grid">
+
+        {% for item in pranayama %}
+
+        <div class="admin-knowledge-card">
+
+            <h3>{{ item.name }}</h3>
+
+            <p>
+                <strong>🎯 Goals:</strong>
+                {{ item.goals | join(", ") }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================
+     MEDITATION
+========================================== -->
+
+<div class="admin-knowledge-section">
+
+    <div class="admin-section-heading">
+        <h2>🧘 Meditation</h2>
+    </div>
+
+    <div class="admin-knowledge-grid">
+
+        {% for item in meditation %}
+
+        <div class="admin-knowledge-card">
+
+            <h3>{{ item.name }}</h3>
+
+            <p>
+                <strong>🎯 Goals:</strong>
+                {{ item.goals | join(", ") }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+{% endblock %}

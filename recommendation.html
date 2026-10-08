@@ -1,0 +1,304 @@
+{% extends "base.html" %}
+
+{% block title %}
+AI Yoga Recommendation - YogaSutra AI
+{% endblock %}
+
+{% block content %}
+
+<section class="recommendation-section">
+
+    <div class="recommendation-container">
+
+        <div class="recommendation-header">
+
+            <p class="small-title">
+                🤖 AI YOGA RECOMMENDATION
+            </p>
+
+            <h1>
+                Let's Create Your
+                <span>Perfect Yoga Plan</span>
+            </h1>
+
+            <p>
+                Answer a few questions and our recommendation system
+                will create a personalized yoga routine for you.
+            </p>
+
+        </div>
+
+
+        <form class="recommendation-form"
+              method="POST"
+              action="{{ url_for('recommendation') }}">
+
+            <!-- Personal Information -->
+
+            <div class="form-section">
+
+                <h2>👤 Personal Information</h2>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Age</label>
+
+                        <input
+                            type="number"
+                            name="age"
+                            placeholder="Enter your age"
+                            min="5"
+                            max="100"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Fitness Level</label>
+
+                        <select name="fitness_level" required>
+
+                            <option value="">
+                                Select Level
+                            </option>
+
+                            <option value="Beginner">
+                                Beginner
+                            </option>
+
+                            <option value="Intermediate">
+                                Intermediate
+                            </option>
+
+                            <option value="Advanced">
+                                Advanced
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Yoga Goal -->
+
+            <div class="form-section">
+
+                <h2>🎯 What Is Your Main Goal?</h2>
+
+                <div class="goal-options">
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Weight Gain"
+                            required
+                        >
+
+                        <span>
+                            ⚖️ Weight Gain
+                        </span>
+
+                    </label>
+
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="goal"
+                            value="Weight Loss"
+                        >
+
+                        <span>
+                            🔥 Weight Loss
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Health Conditions -->
+
+            <div class="form-group">
+
+                <label>Health Conditions</label>
+
+                <p class="form-help">
+                    Select any condition that may affect your yoga practice.
+                </p>
+
+                <div class="checkbox-group">
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="back_pain">
+                        Back Pain
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="neck_pain">
+                        Neck Pain
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="knee_pain">
+                        Knee Pain
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="high_blood_pressure">
+                        High Blood Pressure
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="pregnancy">
+                        Pregnancy
+                    </label>
+
+                    <label class="checkbox-item">
+                        <input
+                            type="checkbox"
+                            name="health_conditions"
+                            value="wrist_pain">
+                        Wrist Pain
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- Available Time -->
+
+            <div class="form-section">
+
+                <h2>⏱️ Available Practice Time</h2>
+
+                <select name="duration" required>
+
+                    <option value="">
+                        Select Duration
+                    </option>
+
+                    <option value="10">
+                        10 Minutes
+                    </option>
+
+                    <option value="20">
+                        20 Minutes
+                    </option>
+
+                    <option value="30">
+                        30 Minutes
+                    </option>
+
+                    <option value="45">
+                        45+ Minutes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Preferred Time -->
+
+            <div class="form-section">
+
+                <h2>🌅 Preferred Practice Time</h2>
+
+                <div class="goal-options">
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="practice_time"
+                            value="Morning"
+                            required
+                        >
+
+                        <span>
+                            🌅 Morning
+                        </span>
+
+                    </label>
+
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="practice_time"
+                            value="Afternoon"
+                        >
+
+                        <span>
+                            ☀️ Afternoon
+                        </span>
+
+                    </label>
+
+
+                    <label class="goal-option">
+
+                        <input
+                            type="radio"
+                            name="practice_time"
+                            value="Evening"
+                        >
+
+                        <span>
+                            🌙 Evening
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="generate-plan-btn">
+
+                🤖 Generate My AI Yoga Plan
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

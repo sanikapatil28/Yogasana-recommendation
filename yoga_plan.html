@@ -1,0 +1,865 @@
+{% extends "base.html" %}
+
+{% block title %}
+Your AI Yoga Plan - YogaSutra AI
+{% endblock %}
+
+{% block content %}
+
+<section class="yoga-plan-section">
+
+    <div class="yoga-plan-container">
+
+        <!-- Header -->
+
+        <div class="plan-result-header">
+
+            <p class="small-title">
+                🤖 AI GENERATED PLAN
+            </p>
+
+            <h1>
+                Your Personalized
+                <span>Yoga Plan</span>
+            </h1>
+
+            <p>
+                Created according to your fitness level,
+                wellness goal and available practice time.
+            </p>
+
+        </div>
+
+
+        <!-- Plan Summary -->
+
+        <div class="plan-summary">
+
+            <div class="summary-item">
+                <span>🎯 Goal</span>
+                <strong>{{ plan.goal }}</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>💪 Level</span>
+                <strong>{{ plan.fitness_level }}</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>⏱️ Duration</span>
+                <strong>{{ plan.duration }} Minutes</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>🌅 Practice Time</span>
+                <strong>{{ plan.practice_time }}</strong>
+            </div>
+
+        </div>
+
+
+        <!-- Safety Information -->
+
+        <div class="safety-notice">
+
+            <div class="safety-title">
+                🛡️ Safety Information
+            </div>
+
+            {% if plan.health_conditions and plan.health_conditions|length > 0 %}
+
+                <p>
+                    Your yoga plan has been filtered according to the
+                    health conditions you selected.
+                </p>
+
+                <div class="selected-conditions">
+
+                    <strong>Selected Health Conditions:</strong>
+
+                    <ul>
+
+                        {% for condition in plan.health_conditions %}
+
+                        <li>
+                            {{ condition.replace("_", " ").title() }}
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+                <p class="safety-warning">
+                    ⚠️ Some yoga poses may have been excluded because
+                    they were marked as unsuitable for the selected conditions.
+                </p>
+
+            {% else %}
+
+                <p>
+                    No specific health conditions were selected.
+                    The plan was generated using your age, fitness level,
+                    goal and available practice time.
+                </p>
+
+            {% endif %}
+
+            <small>
+                This recommendation is for general wellness and does not
+                replace advice from a qualified healthcare professional
+                or yoga instructor.
+            </small>
+
+        </div>
+
+
+        <!-- ==========================================
+             RECOMMENDED YOGASANAS
+             ========================================== -->
+
+        <div class="plan-result-card">
+
+            <h2>🧘 Recommended Yogasanas</h2>
+
+
+            <div class="detailed-asana-list">
+
+                {% for asana in plan.yogasanas %}
+
+                <div class="detailed-asana-card">
+
+
+                    <!-- Asana Header -->
+
+                    <div class="detailed-asana-header">
+
+                        <div class="asana-number">
+                            {{ loop.index }}
+                        </div>
+
+                        <h3>
+                            {{ asana }}
+                        </h3>
+
+                    </div>
+
+
+                    <!-- Asana Image -->
+
+                    <div class="asana-image-container">
+
+                        {% if asana == "Tadasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/tadasana.jpg') }}"
+                            alt="Tadasana - Mountain Pose"
+                        >
+
+                        {% elif asana == "Vrikshasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/vrikshasana.jpg') }}"
+                            alt="Vrikshasana - Tree Pose"
+                        >
+
+                        {% elif asana == "Trikonasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/trikonasana.jpg') }}"
+                            alt="Trikonasana - Triangle Pose"
+                        >
+
+                        {% elif asana == "Bhujangasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/bhujangasana.jpg') }}"
+                            alt="Bhujangasana - Cobra Pose"
+                        >
+
+                        {% elif asana == "Balasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/balasana.jpg') }}"
+                            alt="Balasana - Child's Pose"
+                        >
+
+                        {% elif asana == "Utkatasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/utkatasana.jpg') }}"
+                            alt="Utkatasana - Chair Pose"
+                        >
+
+                        {% elif asana == "Setu Bandhasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/setu_bandhasana.jpg') }}"
+                            alt="Setu Bandhasana - Bridge Pose"
+                        >
+
+                        {% elif asana == "Paschimottanasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/paschimottanasana.jpg') }}"
+                            alt="Paschimottanasana - Seated Forward Bend"
+                        >
+
+                        {% elif asana == "Virabhadrasana I" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/virabhadrasana_1.jpg') }}"
+                            alt="Virabhadrasana I - Warrior I"
+                        >
+
+                        {% elif asana == "Virabhadrasana II" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/virabhadrasana_2.jpg') }}"
+                            alt="Virabhadrasana II - Warrior II"
+                        >
+
+                        {% elif asana == "Navasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/navasana.jpg') }}"
+                            alt="Navasana - Boat Pose"
+                        >
+
+                        {% elif asana == "Dhanurasana" %}
+
+                        <img
+                            src="{{ url_for('static', filename='images/dhanurasana.jpg') }}"
+                            alt="Dhanurasana - Bow Pose"
+                        >
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- Asana Information -->
+
+                    <div class="asana-information">
+
+
+                        <!-- TADASANA -->
+
+                        {% if asana == "Tadasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand upright with your feet together.</li>
+                                <li>Keep your spine straight and shoulders relaxed.</li>
+                                <li>Distribute your weight evenly on both feet.</li>
+                                <li>Keep your arms beside your body.</li>
+                                <li>Breathe normally and hold the position comfortably.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Improves posture and body alignment.</li>
+                                <li>Helps improve balance.</li>
+                                <li>Strengthens the legs and ankles.</li>
+                                <li>Improves body awareness.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Avoid if you feel dizzy or unstable.</li>
+                                <li>Use support if you have balance difficulties.</li>
+                                <li>Do not lock your knees.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- VRIKSHASANA -->
+
+                        {% elif asana == "Vrikshasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand straight with your feet together.</li>
+                                <li>Shift your weight onto one leg.</li>
+                                <li>Place the sole of the other foot against the inner leg.</li>
+                                <li>Bring your palms together in front of your chest.</li>
+                                <li>Maintain balance while breathing normally.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Improves balance and stability.</li>
+                                <li>Strengthens the legs.</li>
+                                <li>Improves concentration.</li>
+                                <li>Encourages better posture.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Do not place your foot directly on the knee.</li>
+                                <li>Use wall support if necessary.</li>
+                                <li>People with knee problems should practice carefully.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- TRIKONASANA -->
+
+                        {% elif asana == "Trikonasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand with your feet comfortably wide apart.</li>
+                                <li>Turn one foot outward.</li>
+                                <li>Extend your arms parallel to the floor.</li>
+                                <li>Reach forward and lower one hand toward the leg or floor.</li>
+                                <li>Extend the opposite arm upward and breathe normally.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the legs and core.</li>
+                                <li>Engages multiple muscle groups.</li>
+                                <li>Supports flexibility of the hips and spine.</li>
+                                <li>Can be included in an active weight-management routine.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Do not force the stretch.</li>
+                                <li>Keep movements controlled.</li>
+                                <li>Stop if you experience pain or dizziness.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- BHUJANGASANA -->
+
+                        {% elif asana == "Bhujangasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Lie on your stomach with your legs extended.</li>
+                                <li>Place your palms beside your chest.</li>
+                                <li>Press gently through your hands.</li>
+                                <li>Lift your chest while keeping the lower body grounded.</li>
+                                <li>Keep your shoulders relaxed and breathe normally.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the back muscles.</li>
+                                <li>Encourages spinal mobility.</li>
+                                <li>Opens the chest and shoulders.</li>
+                                <li>Engages the abdominal region.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Avoid with significant back pain.</li>
+                                <li>Do not forcefully lift the chest.</li>
+                                <li>Generally avoid during pregnancy unless cleared by a qualified professional.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- BALASANA -->
+
+                        {% elif asana == "Balasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Kneel comfortably on the floor.</li>
+                                <li>Bring your hips toward your heels.</li>
+                                <li>Fold your upper body forward.</li>
+                                <li>Extend your arms forward or keep them beside your body.</li>
+                                <li>Relax and breathe slowly.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Encourages relaxation.</li>
+                                <li>Provides a gentle stretch for the back and hips.</li>
+                                <li>Can be used as a resting pose.</li>
+                                <li>Promotes calm breathing.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Use a cushion if your knees are uncomfortable.</li>
+                                <li>Avoid deep forward folding if it causes discomfort.</li>
+                                <li>Practice gently if you have knee problems.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- UTKATASANA -->
+
+                        {% elif asana == "Utkatasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand upright with your feet together or comfortably apart.</li>
+                                <li>Bend your knees as if sitting into a chair.</li>
+                                <li>Raise your arms overhead.</li>
+                                <li>Keep your chest lifted and spine long.</li>
+                                <li>Hold while breathing steadily.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the legs and hips.</li>
+                                <li>Engages the core.</li>
+                                <li>Builds muscular endurance.</li>
+                                <li>Useful in an active weight-management routine.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Practice carefully with knee pain.</li>
+                                <li>Do not allow the knees to collapse inward.</li>
+                                <li>Avoid excessive depth if uncomfortable.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- SETU BANDHASANA -->
+
+                        {% elif asana == "Setu Bandhasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Lie on your back with knees bent.</li>
+                                <li>Keep your feet flat on the floor.</li>
+                                <li>Place your arms beside your body.</li>
+                                <li>Press through your feet and gently lift your hips.</li>
+                                <li>Hold comfortably and breathe normally.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the legs and hips.</li>
+                                <li>Engages the back and core.</li>
+                                <li>Opens the chest.</li>
+                                <li>Supports overall body strength and mobility.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Move into the pose gradually.</li>
+                                <li>Avoid excessive neck pressure.</li>
+                                <li>Stop if you experience pain.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- PASCHIMOTTANASANA -->
+
+                        {% elif asana == "Paschimottanasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Sit with both legs extended forward.</li>
+                                <li>Keep your spine upright.</li>
+                                <li>Inhale and lengthen your torso.</li>
+                                <li>Exhale and gently fold forward from the hips.</li>
+                                <li>Reach toward your feet without forcing the stretch.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Stretches the back of the body.</li>
+                                <li>Supports flexibility of the spine and legs.</li>
+                                <li>Encourages controlled breathing.</li>
+                                <li>Can help improve mobility.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Do not force your body toward the feet.</li>
+                                <li>Keep the movement gentle and controlled.</li>
+                                <li>Bend the knees slightly if needed.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- VIRABHADRASANA I -->
+
+                        {% elif asana == "Virabhadrasana I" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand with your feet apart.</li>
+                                <li>Step one foot back and turn it slightly outward.</li>
+                                <li>Bend the front knee while keeping it aligned with the foot.</li>
+                                <li>Raise your arms overhead.</li>
+                                <li>Keep your torso upright and breathe steadily.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the legs.</li>
+                                <li>Engages the core and hips.</li>
+                                <li>Improves muscular endurance.</li>
+                                <li>Supports an active yoga routine.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Keep the front knee aligned with the ankle.</li>
+                                <li>Do not force the stance wider than comfortable.</li>
+                                <li>Stop if you experience joint pain.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- VIRABHADRASANA II -->
+
+                        {% elif asana == "Virabhadrasana II" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Stand with your legs comfortably wide apart.</li>
+                                <li>Turn one foot outward.</li>
+                                <li>Bend the front knee while extending the back leg.</li>
+                                <li>Extend both arms horizontally.</li>
+                                <li>Look toward the front hand and breathe steadily.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the legs and hips.</li>
+                                <li>Engages the core.</li>
+                                <li>Improves stability and balance.</li>
+                                <li>Builds muscular endurance.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Keep the front knee aligned with the foot.</li>
+                                <li>Avoid excessive knee bending.</li>
+                                <li>Practice within a comfortable range.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- NAVASANA -->
+
+                        {% elif asana == "Navasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Sit with your knees bent and feet on the floor.</li>
+                                <li>Lean back slightly while keeping your spine long.</li>
+                                <li>Lift your feet from the floor.</li>
+                                <li>Extend your legs as comfortable.</li>
+                                <li>Extend your arms forward and maintain steady breathing.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the abdominal muscles.</li>
+                                <li>Engages the hip flexors and core.</li>
+                                <li>Improves core stability.</li>
+                                <li>Builds muscular endurance.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Practice carefully if you have back pain.</li>
+                                <li>Keep the spine controlled rather than rounding excessively.</li>
+                                <li>Avoid if the pose causes pain.</li>
+                            </ul>
+
+                        </div>
+
+
+                        <!-- DHANURASANA -->
+
+                        {% elif asana == "Dhanurasana" %}
+
+                        <div class="asana-info-section">
+
+                            <h4>📋 How to Do</h4>
+
+                            <ol>
+                                <li>Lie on your stomach with your legs extended.</li>
+                                <li>Bend your knees and bring your heels toward your hips.</li>
+                                <li>Reach back and hold your ankles.</li>
+                                <li>Gently lift your chest and thighs.</li>
+                                <li>Hold comfortably while breathing steadily.</li>
+                            </ol>
+
+                        </div>
+
+                        <div class="asana-info-section">
+
+                            <h4>✅ Benefits</h4>
+
+                            <ul>
+                                <li>Strengthens the back and legs.</li>
+                                <li>Engages the core and posterior body.</li>
+                                <li>Opens the chest and shoulders.</li>
+                                <li>Improves overall body mobility.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="asana-info-section precaution">
+
+                            <h4>⚠️ Precautions</h4>
+
+                            <ul>
+                                <li>Avoid with significant back pain.</li>
+                                <li>Do not force the backbend.</li>
+                                <li>Generally avoid during pregnancy unless cleared by a qualified professional.</li>
+                            </ul>
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             PRANAYAMA
+             ========================================== -->
+
+        <div class="plan-result-card">
+
+            <h2>🌬️ Pranayama</h2>
+
+            <div class="asana-list">
+
+                {% for item in plan.pranayama %}
+
+                <div class="asana-item">
+
+                    <span>
+                        🌿 {{ item }}
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             MEDITATION
+             ========================================== -->
+
+        <div class="plan-result-card">
+
+            <h2>🧘‍♂️ Meditation & Relaxation</h2>
+
+            <div class="asana-list">
+
+                {% for item in plan.meditation %}
+
+                <div class="asana-item">
+
+                    <span>
+                        ✨ {{ item }}
+                    </span>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="plan-actions">
+
+            <a href="{{ url_for('dashboard') }}"
+               class="secondary-btn">
+
+                ← Back to Dashboard
+
+            </a>
+
+            <a href="{{ url_for('recommendation') }}"
+               class="primary-btn">
+
+                Generate Another Plan
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
